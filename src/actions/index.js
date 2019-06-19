@@ -13,12 +13,15 @@ export const FETCH_DATA_START = 'FETCH_DATA_START'
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS'
 export const FETCH_DATA_ERROR = 'FETCH_DATA_ERROR'
 
-export const getData = dispatch => {
+export const getData = () => dispatch => {
     dispatch({ type: FETCH_DATA_START })
     axios
         .get(`https://swapi.co/api/people`)
         .then(res => {
-            dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data})
+            console.log(res)
+            dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data.results})
+            
         })
-        .catch(err => dispatch({ type: FETCH_DATA_ERROR}))
+         
+        .catch(err => dispatch({ type: FETCH_DATA_ERROR, payload: err}))
 }
